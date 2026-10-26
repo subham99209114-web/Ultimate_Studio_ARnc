@@ -246,7 +246,7 @@ body.light footer{background:linear-gradient(90deg,#eaf4ff,#f3edff,#e8fff7);colo
 </header>
 
 <section class="hero">
-  <div class="eyebrow">✦ Professional Studios in One Place</div>
+  <div class="eyebrow">✦ 14 Professional Studios in One Place</div>
   <h2>Everything you need, <span>beautifully organized.</span></h2>
   <p>Search any studio below. All programming-language tools are grouped together, while image, PDF and conversion tools have their own dedicated sections.</p>
 </section>
@@ -274,6 +274,7 @@ body.light footer{background:linear-gradient(90deg,#eaf4ff,#f3edff,#e8fff7);colo
     <div class="cards" id="creativeCards"></div>
   </section>
 
+  <div id="dynamicSections"></div>
   <div class="noresults hidden" id="noresults">No matching studio found. Try another keyword.</div>
 </div>
 
@@ -399,12 +400,11 @@ body.light footer{background:linear-gradient(90deg,#eaf4ff,#f3edff,#e8fff7);colo
 
 <script>
 const TOOLS = [{"id":"tool0","name":"C / C# / C++ Studio","url":"https://subham99209114-web.github.io/C_C-_C-_Code_Studio_ARnc/","external":true},{"id":"tool1","name":"Java Studio Pro","url":"https://subham99209114-web.github.io/Java_Studio_Pro_ARnc/","external":true},{"id":"tool2","name":"PHP Studio Pro","url":"https://subham99209114-web.github.io/PHP_Studio_Pro_ARnc/","external":true},{"id":"tool3","name":"Python Studio","url":"https://subham99209114-web.github.io/Python_Studio_ARnc/","external":true},{"id":"tool4","name":"HTML Live Preview","url":"https://subham99209114-web.github.io/html_live_preview_generator_ARnc/","external":true},{"id":"tool5","name":"Format Converter","url":"https://subham99209114-web.github.io/Format_Converter_Studio_ARnc/","external":true},{"id":"tool6","name":"Image → PDF","url":"https://subham99209114-web.github.io/Image_to_PDF_Studio_ARnc/","external":true},{"id":"tool7","name":"Image Workspace","url":"https://subham99209114-web.github.io/Image_Workspace_ARnc/","external":true},{"id":"tool8","name":"Merge Studio","url":"https://subham99209114-web.github.io/Merge_Studio_ARnc/","external":true},{"id":"tool9","name":"PDF → Image","url":"https://subham99209114-web.github.io/pdf_to_image_converter_ARnc/","external":true},{"id":"tool10","name":"Photo Editor","url":"https://subham99209114-web.github.io/Photo_Editor_ARnc/","external":true},{"id":"tool11","name":"Background Remover","url":"https://subham99209114-web.github.io/Remove_Background_ARnc/","external":true},{"id":"tool12","name":"Resize Image","url":"https://subham99209114-web.github.io/image-resize-arnc/","external":true},{"id":"tool13","name":"Image Resizer Pro","url":"https://subham99209114-web.github.io/image_resizer_in/","external":true},{"id":"tool14","name":"Upload Website","url":"https://subham99209114-web.github.io/AppVerse_ARnc/","external":true},{"id":"tool15","name":"Translator Website","url":"https://subham99209114-web.github.io/TranLang_ARnc/","external":true}];
-
-
+// NAYA URL ADD KARNE KA TARIKA: {"id":"tool14","url":"https://example.com"}
+// name na dene par title, icon aur category URL ke sabse specific signals se infer honge.
 const languageNames = new Set([
-  "C / C# / C++ Studio","Java Studio Pro","PHP Studio Pro","Python Studio","HTML Live Preview","Upload Website"
+  "C / C# / C++ Studio","Java Studio Pro","PHP Studio Pro","Python Studio","HTML Live Preview"
 ]);
-
 const meta = {
  "C / C# / C++ Studio":["💻","Multi-language coding workspace","C / C++ / C#","#7c3aed","#00d9ff"],
  "Java Studio Pro":["☕","Java coding and live workspace","Java","#f97316","#ef4444"],
@@ -421,12 +421,103 @@ const meta = {
  "Resize Image":["📐","Resize, compress and crop images","Image","#22c55e","#06b6d4"],
  "Image Resizer Pro":["⚡","Professional image resizing studio","Image","#2563eb","#8b5cf6"]
 };
-
 const langBox=document.getElementById("languageCards"), creativeBox=document.getElementById("creativeCards");
+const dynamicSections=document.getElementById("dynamicSections");
 const search=document.getElementById("search"), count=document.getElementById("count");
 const viewer=document.getElementById("viewer"), frame=document.getElementById("studio"), loading=document.getElementById("loading"), title=document.getElementById("viewerTitle");
 let current=-1;
 
+// URL ke purpose ko score karke best category, icon aur readable title chunta hai.
+function inferTool(t){
+ const raw=String(t.url||"").trim();
+ let u;
+ try{
+   u=new URL(raw);
+   if(!/^https?:$/.test(u.protocol)) throw new Error("Unsupported URL");
+ }catch(e){
+   return {name:t.name||"New Website",category:"🌐 Other Websites",icon:"🌐",description:"Add a valid http:// or https:// URL",tag:"Check URL",accent:"#4f8cff",accent2:"#00d9ff"};
+ }
+ const clean=v=>String(v||"").replace(/%[0-9a-f]{2}/gi," ").replace(/[?#=&]/g," ").replace(/[_-]+/g," ").replace(/\.(html?|php|aspx?|jsp)$/ig," ").replace(/\s+/g," ").trim().toLowerCase();
+ const host=u.hostname.replace(/^www\./i,"").replace(/\.(com|org|net|io|app|dev|co|in|ai|edu|gov)$/i,"").replace(/[.-]+/g," ");
+ const path=clean(u.pathname.split("/").filter(Boolean).slice(-1)[0]||"");
+ const githubPath=u.hostname.endsWith("github.io") ? clean(u.pathname.split("/").filter(Boolean)[0]||"") : "";
+ const nameText=clean(t.name||"");
+ const signal=clean([host,githubPath,u.pathname,u.search,u.hash,t.name||""].join(" "));
+ const rules=[
+  {id:"imagepdf",category:"🎨 Image, PDF & Utility Studios",tag:"Image / PDF / Utility",icon:"🧰",description:"Edit, resize, convert or organize images and files",accent:"#06b6d4",accent2:"#8b5cf6",words:["image to pdf","jpg to pdf","png to pdf","pdf to image","pdf to jpg","pdf to png","image resizer","resize image","photo editor","background remover","remove background","image compressor","compress image","image cropper","merge pdf","pdf merger","file merger","format converter","file converter","pdf converter","image editor","image workspace","image","photo","picture","pdf","png","jpeg","jpg","resize","compress","merge","crop","converter","convert","format"]},
+  {id:"code",category:"💻 Programming Languages & Web Development",tag:"Programming",icon:"💻",description:"Write, edit, test or preview code and websites",accent:"#7c3aed",accent2:"#00d9ff",words:["javascript","typescript","web development","html live preview","code studio","coding","compiler","programming","developer","python","java","php","html","css","react","node js","github","gitlab","ide","code editor","code","editor","api","sql"]},
+  {id:"ai",category:"🤖 AI Tools",tag:"AI Tools",icon:"🤖",description:"AI assistants, generators and intelligent tools",accent:"#06b6d4",accent2:"#7c3aed",words:["artificial intelligence","machine learning","ai image generator","ai video generator","ai writer","ai assistant","ai chatbot","chatgpt","chatbot","image generator","video generator","text generator","prompt generator","llm","openai","gemini","copilot","perplexity","stable diffusion"]},
+  {id:"games",category:"🎮 Games & Entertainment",tag:"Games & Entertainment",icon:"🎮",description:"Play games and explore entertainment experiences",accent:"#8b5cf6",accent2:"#ec4899",words:["endless runner","racing game","car game","scooter game","game development","game maker","gaming","arcade","racing","runner","puzzle","game","play"]},
+  {id:"media",category:"🎬 Video & Audio Tools",tag:"Video / Audio",icon:"🎬",description:"Create, edit, convert or process video and audio",accent:"#ec4899",accent2:"#8b5cf6",words:["text to speech","speech to text","voice recorder","video editor","video converter","audio converter","youtube downloader","subtitle maker","music player","video","audio","music","mp3","mp4","sound","voice","recorder","subtitle","podcast"]},
+  {id:"design",category:"🎨 Design & Creativity",tag:"Design & Creativity",icon:"🖌️",description:"Design graphics, layouts, logos and creative assets",accent:"#f472b6",accent2:"#8b5cf6",words:["graphic design","logo maker","poster maker","design tool","ui design","ux design","figma","canva","illustration","template","design","logo","font","color palette"]},
+  {id:"education",category:"📚 Education & Learning",tag:"Education",icon:"📚",description:"Learn, study, practice and explore educational resources",accent:"#22c55e",accent2:"#06b6d4",words:["online learning","learning platform","tutorial","education","course","school","study","quiz","lesson","exam","homework","dictionary","flashcard","language learning"]},
+  {id:"business",category:"🛍️ Shopping & Business",tag:"Business & Shopping",icon:"🛍️",description:"Shopping, products, payments and business services",accent:"#f97316",accent2:"#ef4444",words:["amazon affiliate","affiliate marketing","online shopping","e commerce","ecommerce","shopping","product marketplace","payment gateway","invoice generator","business","payment","invoice","store","shop","affiliate"]},
+  {id:"social",category:"💬 Social & Communication",tag:"Social / Communication",icon:"💬",description:"Communicate, message and connect with communities",accent:"#0ea5e9",accent2:"#6366f1",words:["social media","messaging app","video call","community forum","messenger","messaging","chat","forum","instagram","facebook","whatsapp","telegram","discord"]},
+  {id:"productivity",category:"📁 Productivity & Documents",tag:"Productivity",icon:"📁",description:"Manage documents, notes, tasks and everyday work",accent:"#14b8a6",accent2:"#3b82f6",words:["document editor","word processor","spreadsheet","presentation maker","task manager","project management","cloud storage","online notes","productivity","document","notepad","calendar","notes","drive","excel","word"]},
+  {id:"security",category:"🔐 Security & Privacy",tag:"Security & Privacy",icon:"🔐",description:"Security, privacy, password and network tools",accent:"#64748b",accent2:"#0f172a",words:["password manager","virus scanner","malware scanner","privacy checker","security scanner","two factor","vpn","antivirus","encryption","password","security","privacy"]},
+  {id:"finance",category:"💰 Finance & Calculators",tag:"Finance / Calculator",icon:"💰",description:"Calculations, budgeting and financial utilities",accent:"#16a34a",accent2:"#84cc16",words:["currency converter","loan calculator","gst calculator","tax calculator","interest calculator","budget planner","stock market","exchange rate","calculator","finance","budget","currency","investment","invoice"]},
+  {id:"travel",category:"🧭 Travel & Maps",tag:"Travel / Maps",icon:"🧭",description:"Maps, navigation, destinations and travel planning",accent:"#0ea5e9",accent2:"#22c55e",words:["route planner","travel planner","flight booking","hotel booking","google maps","navigation","directions","maps","map","travel","hotel","flight"]},
+  {id:"weather",category:"🌦️ Weather & Environment",tag:"Weather",icon:"🌦️",description:"Weather forecasts and environmental information",accent:"#38bdf8",accent2:"#0ea5e9",words:["weather forecast","weather radar","air quality","weather","forecast","temperature"]},
+  {id:"health",category:"🩺 Health & Wellness",tag:"Health / Wellness",icon:"🩺",description:"Health information and wellness resources",accent:"#14b8a6",accent2:"#059669",words:["fitness tracker","workout planner","health tracker","mental wellness","nutrition","fitness","workout","wellness","health"]},
+  {id:"news",category:"📰 News & Information",tag:"News / Information",icon:"📰",description:"News, articles and current information",accent:"#64748b",accent2:"#2563eb",words:["news portal","breaking news","news","magazine","blog","articles"]}
+ ];
+ // Prefer the most specific matching phrase, not the first generic keyword.
+ const normalized=" "+signal.replace(/[^a-z0-9+#.\s]/g," ").replace(/\s+/g," ").trim()+" ";
+ let best=null,bestScore=0;
+ for(const r of rules){
+   let score=0;
+   for(const w of r.words){
+     const phrase=" "+w.toLowerCase()+" ";
+     if(normalized.includes(phrase)){
+       const n=w.split(" ").length;
+       const points=n*10 + Math.min(w.length,24)/10;
+       if(points>score) score=points;
+     }
+   }
+   if(score>bestScore){best=r;bestScore=score;}
+ }
+ // Existing named cards retain their exact original design and section.
+ if(t.name && languageNames.has(t.name)) best=rules.find(r=>r.id==="code");
+ else if(t.name && meta[t.name]) best=rules.find(r=>r.id==="imagepdf");
+ const rawSlug=githubPath || path || host || "website";
+ let slug=rawSlug.replace(/\b(arnc|ar nc|website|web app|index|home|main|final|new|latest|updated|version|v\d+)\b/ig," ").replace(/\s+/g," ").trim();
+ const titleCase=v=>v.split(/\s+/).filter(Boolean).map(w=>{
+   const low=w.toLowerCase();
+   if(["ai","pdf","html","css","php","api","url","3d","ui","ux","sql","xml","mp3","mp4","gif","svg","jpg","png","json","js","c++","c#"].includes(low)) return low.toUpperCase();
+   return low.charAt(0).toUpperCase()+low.slice(1);
+ }).join(" ");
+ let generated=titleCase(slug);
+ const titleRules=[
+  [/image\s*(to|2)\s*pdf|image.?to.?pdf|jpg\s*to\s*pdf|png\s*to\s*pdf/i,"Image to PDF Converter"],
+  [/pdf\s*(to|2)\s*image|pdf.?to.?image|pdf\s*to\s*(jpg|png)/i,"PDF to Image Converter"],
+  [/background.*remov|remov.*background/i,"Background Remover"],
+  [/image.*resiz|resiz.*image/i,"Image Resizer"],
+  [/photo.*edit|edit.*photo/i,"Photo Editor"],
+  [/merge.*(pdf|image|file)|(pdf|image|file).*merge/i,"File Merge Studio"],
+  [/format.*convert|convert.*format/i,"Format Converter"],
+  [/python/i,"Python Coding Studio"],[/javascript/i,"JavaScript Coding Studio"],[/typescript/i,"TypeScript Coding Studio"],
+  [/\bjava\b/i,"Java Coding Studio"],[/\bphp\b/i,"PHP Coding Studio"],
+  [/html.*(preview|live)|(preview|live).*html/i,"HTML Live Preview"],
+  [/c.?c\+\+|c.?sharp|code.?studio|compiler/i,"Programming Code Studio"],
+  [/car.*game|racing/i,"Racing Game"],[/runner.*game|endless.?runner/i,"Endless Runner Game"],
+  [/chat.?bot|chatgpt|ai.?assistant/i,"AI Chat Assistant"],[/image.*generat/i,"AI Image Generator"],[/video.*generat/i,"AI Video Generator"],
+  [/video.*edit/i,"Video Editor"],[/audio.*convert/i,"Audio Converter"],[/translator|translation/i,"Language Translator"],
+  [/calculator/i,"Online Calculator"],[/weather|forecast/i,"Weather Forecast"],[/dictionary/i,"Online Dictionary"],
+  [/logo.*maker|maker.*logo/i,"Logo Maker"],[/password.*manager/i,"Password Manager"],[/currency.*convert/i,"Currency Converter"],
+  [/travel.*planner|route.*planner/i,"Travel Planner"],[/quiz/i,"Online Quiz"],[/note.?pad|online.?notes/i,"Online Notes"]
+ ];
+ for(const [re,name] of titleRules){if(re.test(signal)){generated=name;break;}}
+ if(!generated || generated.length<3 || /^(github|google|website|new)$/i.test(generated)) generated=best?best.tag+" Tool":titleCase(host)||"Website";
+ // Avoid ugly repository IDs: if the path is opaque, use a useful category-based title.
+ if(/^[a-f0-9-]{8,}$/i.test(generated) || generated.length>54) generated=best?best.tag+" Tool":titleCase(host)||"Website";
+ return {name:t.name||generated,category:best?best.category:"🌐 Other Websites",icon:best?best.icon:"🌐",description:best?best.description:"Website automatically added from its URL; category can be refined by adding a name",tag:best?best.tag:"Website",accent:best?best.accent:"#4f8cff",accent2:best?best.accent2:"#00d9ff"};
+}
+function toolInfo(t){
+ const inferred=inferTool(t);
+ const x=meta[t.name];
+ if(x) return {name:t.name,category:languageNames.has(t.name)?"💻 Programming Languages & Web Development":"🎨 Image, PDF & Utility Studios",icon:x[0],description:x[1],tag:x[2],accent:x[3],accent2:x[4]};
+ return inferred;
+}
 function openExternal(url){
  const a=document.createElement("a");
  a.href=url; a.target="_blank"; a.rel="noopener noreferrer";
@@ -434,23 +525,45 @@ function openExternal(url){
  document.body.appendChild(a); a.click(); a.remove();
 }
 function card(t,i){
- const x=meta[t.name]||["🧰","Professional browser tool","Studio","#4f8cff","#00d9ff"];
- const b=document.createElement("button"); b.className="tool-card"; b.dataset.name=t.name.toLowerCase();
- b.style.setProperty("--accent",x[3]);b.style.setProperty("--accent2",x[4]);b.style.setProperty("--glow",x[3]);
- b.innerHTML='<div class="icon">'+x[0]+'</div><h4>'+t.name+'</h4><p>'+x[1]+'</p><small style="display:block;margin-top:8px;color:#7085a8;font-size:10px">'+x[2]+'</small><span class="open">OPEN WEBSITE ↗</span>';
+ const info=toolInfo(t);
+ const b=document.createElement("button"); b.className="tool-card"; b.dataset.name=(info.name+" "+t.url+" "+info.category).toLowerCase();
+ b.style.setProperty("--accent",info.accent);b.style.setProperty("--accent2",info.accent2);b.style.setProperty("--glow",info.accent);
+ const icon=document.createElement("div");icon.className="icon";icon.textContent=info.icon;
+ const h=document.createElement("h4");h.textContent=info.name;
+ const p=document.createElement("p");p.textContent=info.description;
+ const small=document.createElement("small");small.style.cssText="display:block;margin-top:8px;color:#7085a8;font-size:10px";small.textContent=info.tag;
+ const open=document.createElement("span");open.className="open";open.textContent="OPEN WEBSITE ↗";
+ b.append(icon,h,p,small,open); b.title=t.url;
  b.onclick=()=>openExternal(t.url);
  return b;
 }
 function render(){
- const q=search.value.trim().toLowerCase();langBox.innerHTML="";creativeBox.innerHTML="";
- let visible=0;
+ const q=search.value.trim().toLowerCase();langBox.innerHTML="";creativeBox.innerHTML="";dynamicSections.innerHTML="";
+ const groups=new Map(); let visible=0;
  TOOLS.forEach((t,i)=>{
-   if(q && !(t.name.toLowerCase().includes(q)||(meta[t.name]?.join(" ").toLowerCase().includes(q)))) return;
+   if(!t || !t.url) return;
+   const info=toolInfo(t);
+   if(q && !((info.name+" "+info.description+" "+info.tag+" "+info.category+" "+t.url).toLowerCase().includes(q))) return;
    visible++;
-   (languageNames.has(t.name)?langBox:creativeBox).appendChild(card(t,i));
+   const c=card(t,i);
+   if(info.category.startsWith("💻")) langBox.appendChild(c);
+   else if(info.category.startsWith("🎨")) creativeBox.appendChild(c);
+   else {
+     if(!groups.has(info.category)) groups.set(info.category,[]);
+     groups.get(info.category).push(c);
+   }
  });
  document.getElementById("languageSection").classList.toggle("hidden",langBox.children.length===0);
  document.getElementById("creativeSection").classList.toggle("hidden",creativeBox.children.length===0);
+ groups.forEach((cards,heading)=>{
+   const section=document.createElement("section");section.className="section";
+   const head=document.createElement("div");head.className="section-head";
+   const left=document.createElement("div");const h=document.createElement("h3");h.textContent=heading;
+   const p=document.createElement("p");p.textContent="Automatically organized from the URL you added in the code";
+   left.append(h,p);const badge=document.createElement("span");badge.className="section-badge";badge.textContent="AUTO GROUP";
+   head.append(left,badge);const cardsBox=document.createElement("div");cardsBox.className="cards";cards.forEach(c=>cardsBox.appendChild(c));
+   section.append(head,cardsBox);dynamicSections.appendChild(section);
+ });
  document.getElementById("noresults").classList.toggle("hidden",visible!==0);
  count.textContent=visible+" tool"+(visible===1?"":"s");
 }
