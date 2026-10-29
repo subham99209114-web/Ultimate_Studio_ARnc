@@ -399,9 +399,15 @@ body.light footer{background:linear-gradient(90deg,#eaf4ff,#f3edff,#e8fff7);colo
 </div>
 
 <script>
-const TOOLS = [{"id":"tool0","name":"C / C# / C++ Studio","url":"https://subham99209114-web.github.io/C_C-_C-_Code_Studio_ARnc/","external":true},{"id":"tool1","name":"Java Studio Pro","url":"https://subham99209114-web.github.io/Java_Studio_Pro_ARnc/","external":true},{"id":"tool2","name":"PHP Studio Pro","url":"https://subham99209114-web.github.io/PHP_Studio_Pro_ARnc/","external":true},{"id":"tool3","name":"Python Studio","url":"https://subham99209114-web.github.io/Python_Studio_ARnc/","external":true},{"id":"tool4","name":"HTML Live Preview","url":"https://subham99209114-web.github.io/html_live_preview_generator_ARnc/","external":true},{"id":"tool5","name":"Format Converter","url":"https://subham99209114-web.github.io/Format_Converter_Studio_ARnc/","external":true},{"id":"tool6","name":"Image → PDF","url":"https://subham99209114-web.github.io/Image_to_PDF_Studio_ARnc/","external":true},{"id":"tool7","name":"Image Workspace","url":"https://subham99209114-web.github.io/Image_Workspace_ARnc/","external":true},{"id":"tool8","name":"Merge Studio","url":"https://subham99209114-web.github.io/Merge_Studio_ARnc/","external":true},{"id":"tool9","name":"PDF → Image","url":"https://subham99209114-web.github.io/pdf_to_image_converter_ARnc/","external":true},{"id":"tool10","name":"Photo Editor","url":"https://subham99209114-web.github.io/Photo_Editor_ARnc/","external":true},{"id":"tool11","name":"Background Remover","url":"https://subham99209114-web.github.io/Remove_Background_ARnc/","external":true},{"id":"tool12","name":"Resize Image","url":"https://subham99209114-web.github.io/image-resize-arnc/","external":true},{"id":"tool13","name":"Image Resizer Pro","url":"https://subham99209114-web.github.io/image_resizer_in/","external":true},{"id":"tool14","name":"Upload Website","url":"https://subham99209114-web.github.io/AppVerse_ARnc/","external":true},{"id":"tool15","name":"Translator Website","url":"https://subham99209114-web.github.io/TranLang_ARnc/","external":true},{"id":"tool16","name":"Game","url":"https://subham99209114-web.github.io/Gaming_ARnc/","external":true},{"id":"tool17","name":"Competitive Exam Books","url":"https://subham99209114-web.github.io/Competitive_Exam_ARnc/","external":true}];
-// NAYA URL ADD KARNE KA TARIKA: {"id":"tool14","url":"https://example.com"}
-// name na dene par title, icon aur category URL ke sabse specific signals se infer honge.
+const TOOLS = [{"id":"#","name":"C / C# / C++ Studio","url":"https://subham99209114-web.github.io/C_C-_C-_Code_Studio_ARnc/","external":true},{"id":"#","name":"Java Studio Pro","url":"https://subham99209114-web.github.io/Java_Studio_Pro_ARnc/","external":true},{"id":"#","name":"PHP Studio Pro","url":"https://subham99209114-web.github.io/PHP_Studio_Pro_ARnc/","external":true},{"id":"#","name":"Python Studio","url":"https://subham99209114-web.github.io/Python_Studio_ARnc/","external":true},{"id":"#","name":"HTML Live Preview","url":"https://subham99209114-web.github.io/html_live_preview_generator_ARnc/","external":true},{"id":"#","name":"Format Converter","url":"https://subham99209114-web.github.io/Format_Converter_Studio_ARnc/","external":true},{"id":"#","name":"Image → PDF","url":"https://subham99209114-web.github.io/Image_to_PDF_Studio_ARnc/","external":true},{"id":"#","name":"Image Workspace","url":"https://subham99209114-web.github.io/Image_Workspace_ARnc/","external":true},{"id":"#","name":"Merge Studio","url":"https://subham99209114-web.github.io/Merge_Studio_ARnc/","external":true},{"id":"#","name":"PDF → Image","url":"https://subham99209114-web.github.io/pdf_to_image_converter_ARnc/","external":true},{"id":"#","name":"Photo Editor","url":"https://subham99209114-web.github.io/Photo_Editor_ARnc/","external":true},{"id":"#","name":"Background Remover","url":"https://subham99209114-web.github.io/Remove_Background_ARnc/","external":true},{"id":"#","name":"Resize Image","url":"https://subham99209114-web.github.io/image-resize-arnc/","external":true},{"id":"#","name":"Image Resizer Pro","url":"https://subham99209114-web.github.io/image_resizer_in/","external":true},{"id":"#","name":"Upload Website","url":"https://subham99209114-web.github.io/AppVerse_ARnc/","external":true},{"id":"#","name":"Translator Website","url":"https://subham99209114-web.github.io/TranLang_ARnc/","external":true},{"id":"#","name":"Game","url":"https://subham99209114-web.github.io/Gaming_ARnc/","external":true},{"id":"#","name":"Competitive Exam Books","url":"https://subham99209114-web.github.io/Competitive_Exam_ARnc/","external":true}];
+
+// NAYA URL ADD KARNE KA TARIKA:
+// {"id":"tool18","name":"Optional Website Name","url":"https://example.com","external":true}
+// URL, website name aur purpose keywords se category infer hoti hai.
+// Sabse accurate result ke liye TOOLS item mein optional name aur category bhi dein.
+// Example: {id:"custom1",name:"My Translator",url:"https://example.com",category:"🌍 Translation & Language Tools",external:true}
+// Explicit category URL guesses se zyada priority leti hai.
+
 const languageNames = new Set([
   "C / C# / C++ Studio","Java Studio Pro","PHP Studio Pro","Python Studio","HTML Live Preview"
 ]);
@@ -438,14 +444,24 @@ function inferTool(t){
    return {name:t.name||"New Website",category:"🌐 Other Websites",icon:"🌐",description:"Add a valid http:// or https:// URL",tag:"Check URL",accent:"#4f8cff",accent2:"#00d9ff"};
  }
  const clean=v=>String(v||"").replace(/%[0-9a-f]{2}/gi," ").replace(/[?#=&]/g," ").replace(/[_-]+/g," ").replace(/\.(html?|php|aspx?|jsp)$/ig," ").replace(/\s+/g," ").trim().toLowerCase();
- const host=u.hostname.replace(/^www\./i,"").replace(/\.(com|org|net|io|app|dev|co|in|ai|edu|gov)$/i,"").replace(/[.-]+/g," ");
- const path=clean(u.pathname.split("/").filter(Boolean).slice(-1)[0]||"");
- const githubPath=u.hostname.endsWith("github.io") ? clean(u.pathname.split("/").filter(Boolean)[0]||"") : "";
+ const hostingProvider=/(^|\.)(github\.io|gitlab\.io|pages\.dev|netlify\.app|vercel\.app|web\.app|firebaseapp\.com|wordpress\.com|blogspot\.com)$/i.test(u.hostname);
+ const host=clean(u.hostname.replace(/^www\./i,"").replace(/\.(com|org|net|io|app|dev|co|in|ai|edu|gov)$/i,"").replace(/[.-]+/g," "));
+ const segments=u.pathname.split("/").filter(Boolean);
+ const path=clean(segments.slice(-1)[0]||"");
+ const githubPath=hostingProvider ? clean(segments[0]||"") : "";
  const nameText=clean(t.name||"");
- const signal=clean([host,githubPath,u.pathname,u.search,u.hash,t.name||""].join(" "));
+ // Give human-provided name/purpose the most weight. Ignore hosting-provider words such as GitHub Pages.
+ const primarySignal=clean([t.name||"",t.purpose||"",t.description||""].join(" "));
+ const projectSignal=clean([githubPath,hostingProvider?"":host].join(" "));
+ const routeSignal=clean([u.pathname,u.search,u.hash].join(" "));
+ const signal=clean([primarySignal,projectSignal,routeSignal].join(" "));
  const rules=[
-  {id:"imagepdf",category:"🎨 Image, PDF & Utility Studios",tag:"Image / PDF / Utility",icon:"🧰",description:"Edit, resize, convert or organize images and files",accent:"#06b6d4",accent2:"#8b5cf6",words:["image to pdf","jpg to pdf","png to pdf","pdf to image","pdf to jpg","pdf to png","image resizer","resize image","photo editor","background remover","remove background","image compressor","compress image","image cropper","merge pdf","pdf merger","file merger","format converter","file converter","pdf converter","image editor","image workspace","image","photo","picture","pdf","png","jpeg","jpg","resize","compress","merge","crop","converter","convert","format"]},
-  {id:"code",category:"💻 Programming Languages & Web Development",tag:"Programming",icon:"💻",description:"Write, edit, test or preview code and websites",accent:"#7c3aed",accent2:"#00d9ff",words:["javascript","typescript","web development","html live preview","code studio","coding","compiler","programming","developer","python","java","php","html","css","react","node js","github","gitlab","ide","code editor","code","editor","api","sql"]},
+  {id:"translation",category:"🌍 Translation & Language Tools",tag:"Translation / Languages",icon:"🌍",description:"Translate text and work with languages, OCR and multilingual content",accent:"#14b8a6",accent2:"#3b82f6",words:["language translator","image translator","translate image","translate photo","image translation","text translator","website translator","translation tool","translator","translate","translation","translang","language translation","multilingual","localization","ocr translator"]},
+  {id:"gamingportal",category:"🎮 Games & Entertainment",tag:"Gaming Portal",icon:"🎮",description:"Browse and play games and entertainment experiences",accent:"#8b5cf6",accent2:"#ec4899",words:["gaming portal","game portal","online games","browser games","play games","game website","gaming website","games website","crazygames","poki","game hub","gaming"]},
+  {id:"imageutility",category:"🖼️ Image Tools & Editors",tag:"Image Tools",icon:"🖼️",description:"Resize, edit, convert, enhance or process images",accent:"#06b6d4",accent2:"#8b5cf6",words:["image resizer","resize image","image resize","photo editor","image editor","background remover","remove background","image compressor","image converter","image to pdf","pdf to image","image workspace","photo tools","image tools"]},
+  {id:"fileconverter",category:"🔄 File & Format Converters",tag:"File Converter",icon:"🔄",description:"Convert files between supported formats",accent:"#06b6d4",accent2:"#8b5cf6",words:["format converter","file converter","document converter","convert files","file conversion","format conversion","converter studio"]},
+  {id:"code",category:"💻 Programming Languages & Web Development",tag:"Programming",icon:"💻",description:"Write, edit, test or preview code and websites",accent:"#7c3aed",accent2:"#00d9ff",words:["javascript","typescript","web development","html live preview","code studio","coding","compiler","programming","developer","python","java","php","html","css","react","node js","github","gitlab","ide","code editor","code","api","sql"]},
+  {id:"imagepdf",category:"🎨 Image, PDF & Utility Studios",tag:"Image / PDF / Utility",icon:"🧰",description:"Edit, resize, convert or organize images and files",accent:"#06b6d4",accent2:"#8b5cf6",words:["image to pdf","jpg to pdf","png to pdf","pdf to image","pdf to jpg","pdf to png","image resizer","resize image","photo editor","background remover","remove background","image compressor","compress image","image cropper","merge pdf","pdf merger","file merger","format converter","file converter","pdf converter","image editor","image workspace","image resize","resizeimage","imageresizer","image","photo","picture","pdf","png","jpeg","jpg","resize","compress","merge","crop","converter","convert","format"]},
   {id:"ai",category:"🤖 AI Tools",tag:"AI Tools",icon:"🤖",description:"AI assistants, generators and intelligent tools",accent:"#06b6d4",accent2:"#7c3aed",words:["artificial intelligence","machine learning","ai image generator","ai video generator","ai writer","ai assistant","ai chatbot","chatgpt","chatbot","image generator","video generator","text generator","prompt generator","llm","openai","gemini","copilot","perplexity","stable diffusion"]},
   {id:"games",category:"🎮 Games & Entertainment",tag:"Games & Entertainment",icon:"🎮",description:"Play games and explore entertainment experiences",accent:"#8b5cf6",accent2:"#ec4899",words:["endless runner","racing game","car game","scooter game","game development","game maker","gaming","arcade","racing","runner","puzzle","game","play"]},
   {id:"media",category:"🎬 Video & Audio Tools",tag:"Video / Audio",icon:"🎬",description:"Create, edit, convert or process video and audio",accent:"#ec4899",accent2:"#8b5cf6",words:["text to speech","speech to text","voice recorder","video editor","video converter","audio converter","youtube downloader","subtitle maker","music player","video","audio","music","mp3","mp4","sound","voice","recorder","subtitle","podcast"]},
@@ -461,25 +477,42 @@ function inferTool(t){
   {id:"health",category:"🩺 Health & Wellness",tag:"Health / Wellness",icon:"🩺",description:"Health information and wellness resources",accent:"#14b8a6",accent2:"#059669",words:["fitness tracker","workout planner","health tracker","mental wellness","nutrition","fitness","workout","wellness","health"]},
   {id:"news",category:"📰 News & Information",tag:"News / Information",icon:"📰",description:"News, articles and current information",accent:"#64748b",accent2:"#2563eb",words:["news portal","breaking news","news","magazine","blog","articles"]}
  ];
- // Prefer the most specific matching phrase, not the first generic keyword.
- const normalized=" "+signal.replace(/[^a-z0-9+#.\s]/g," ").replace(/\s+/g," ").trim()+" ";
+ // Score exact phrase matches by source: purpose/name > project slug > route > custom domain.
+ // This avoids classifying every GitHub Pages URL as a programming website.
+ const normalizeMatch=v=>" "+clean(v).replace(/[^a-z0-9+#.\s]/g," ").replace(/\s+/g," ").trim()+" ";
+ const weightedSignals=[
+   {text:normalizeMatch(primarySignal),weight:4.0},
+   {text:normalizeMatch(projectSignal),weight:3.2},
+   {text:normalizeMatch(routeSignal),weight:1.8},
+   {text:normalizeMatch(hostingProvider?"":host),weight:1.2}
+ ];
  let best=null,bestScore=0;
  for(const r of rules){
    let score=0;
    for(const w of r.words){
      const phrase=" "+w.toLowerCase()+" ";
-     if(normalized.includes(phrase)){
-       const n=w.split(" ").length;
-       const points=n*10 + Math.min(w.length,24)/10;
-       if(points>score) score=points;
+     for(const source of weightedSignals){
+       if(source.text.includes(phrase)){
+         const n=w.trim().split(/\s+/).length;
+         const points=(n*10 + Math.min(w.length,36)/8)*source.weight;
+         if(points>score) score=points;
+       }
      }
    }
+   // Avoid weak matches from generic words like "editor", "play", or "image" alone.
    if(score>bestScore){best=r;bestScore=score;}
+ }
+ if(bestScore<18){best=null;bestScore=0;}
+ // Explicit user-supplied category is the most reliable option and overrides heuristic guessing.
+ if(t.category && String(t.category).trim()){
+   const customCategory=String(t.category).trim();
+   const matching=rules.find(r=>r.category.toLowerCase()===customCategory.toLowerCase());
+   return {name:t.name||"Website",category:customCategory,icon:t.icon||(matching?matching.icon:"🌐"),description:t.description||(matching?matching.description:"Website grouped under the category you specified"),tag:t.tag||(matching?matching.tag:"Custom Category"),accent:t.accent||(matching?matching.accent:"#4f8cff"),accent2:t.accent2||(matching?matching.accent2:"#00d9ff")};
  }
  // Existing named cards retain their exact original design and section.
  if(t.name && languageNames.has(t.name)) best=rules.find(r=>r.id==="code");
  else if(t.name && meta[t.name]) best=rules.find(r=>r.id==="imagepdf");
- const rawSlug=githubPath || path || host || "website";
+ const rawSlug=githubPath || path || (hostingProvider ? "" : host) || "website";
  let slug=rawSlug.replace(/\b(arnc|ar nc|website|web app|index|home|main|final|new|latest|updated|version|v\d+)\b/ig," ").replace(/\s+/g," ").trim();
  const titleCase=v=>v.split(/\s+/).filter(Boolean).map(w=>{
    const low=w.toLowerCase();
@@ -488,6 +521,8 @@ function inferTool(t){
  }).join(" ");
  let generated=titleCase(slug);
  const titleRules=[
+  [/translang|translator|translation|translate/i,"Language Translator"],
+  [/gaming|game.?portal|online.?games|browser.?games|games/i,"Gaming Website"],
   [/image\s*(to|2)\s*pdf|image.?to.?pdf|jpg\s*to\s*pdf|png\s*to\s*pdf/i,"Image to PDF Converter"],
   [/pdf\s*(to|2)\s*image|pdf.?to.?image|pdf\s*to\s*(jpg|png)/i,"PDF to Image Converter"],
   [/background.*remov|remov.*background/i,"Background Remover"],
@@ -510,7 +545,17 @@ function inferTool(t){
  if(!generated || generated.length<3 || /^(github|google|website|new)$/i.test(generated)) generated=best?best.tag+" Tool":titleCase(host)||"Website";
  // Avoid ugly repository IDs: if the path is opaque, use a useful category-based title.
  if(/^[a-f0-9-]{8,}$/i.test(generated) || generated.length>54) generated=best?best.tag+" Tool":titleCase(host)||"Website";
- return {name:t.name||generated,category:best?best.category:"🌐 Other Websites",icon:best?best.icon:"🌐",description:best?best.description:"Website automatically added from its URL; category can be refined by adding a name",tag:best?best.tag:"Website",accent:best?best.accent:"#4f8cff",accent2:best?best.accent2:"#00d9ff"};
+ // If no known purpose matches, derive a dedicated category from the URL slug.
+ // This prevents every custom website from falling into the same generic section.
+ const fallbackBase=titleCase(slug.replace(/\b(arnc|website|web app|index|home|main|final|new|latest|updated|version|v\d+)\b/ig," ").replace(/\s+/g," ").trim());
+ const fallbackCategory=fallbackBase && !/^(Github|Google|Website|New)$/i.test(fallbackBase)
+   ? "🌐 "+fallbackBase+" Tools"
+   : "🌐 Other Websites";
+ const category=best?best.category:fallbackCategory;
+ const fallbackDescription=fallbackBase
+   ? "Automatically grouped from this website's URL. Add a descriptive name or purpose keywords for more accurate classification."
+   : "Website automatically added from its URL; category can be refined by adding a name.";
+ return {name:t.name||generated,category,icon:best?best.icon:"🌐",description:best?best.description:fallbackDescription,tag:best?best.tag:(fallbackBase||"Website"),accent:best?best.accent:"#4f8cff",accent2:best?best.accent2:"#00d9ff"};
 }
 function toolInfo(t){
  const inferred=inferTool(t);
@@ -538,34 +583,56 @@ function card(t,i){
  return b;
 }
 function render(){
- const q=search.value.trim().toLowerCase();langBox.innerHTML="";creativeBox.innerHTML="";dynamicSections.innerHTML="";
- const groups=new Map(); let visible=0;
- TOOLS.forEach((t,i)=>{
-   if(!t || !t.url) return;
-   const info=toolInfo(t);
-   if(q && !((info.name+" "+info.description+" "+info.tag+" "+info.category+" "+t.url).toLowerCase().includes(q))) return;
-   visible++;
-   const c=card(t,i);
-   if(info.category.startsWith("💻")) langBox.appendChild(c);
-   else if(info.category.startsWith("🎨")) creativeBox.appendChild(c);
-   else {
-     if(!groups.has(info.category)) groups.set(info.category,[]);
-     groups.get(info.category).push(c);
-   }
- });
- document.getElementById("languageSection").classList.toggle("hidden",langBox.children.length===0);
- document.getElementById("creativeSection").classList.toggle("hidden",creativeBox.children.length===0);
- groups.forEach((cards,heading)=>{
-   const section=document.createElement("section");section.className="section";
-   const head=document.createElement("div");head.className="section-head";
-   const left=document.createElement("div");const h=document.createElement("h3");h.textContent=heading;
-   const p=document.createElement("p");p.textContent="Automatically organized from the URL you added in the code";
-   left.append(h,p);const badge=document.createElement("span");badge.className="section-badge";badge.textContent="AUTO GROUP";
-   head.append(left,badge);const cardsBox=document.createElement("div");cardsBox.className="cards";cards.forEach(c=>cardsBox.appendChild(c));
-   section.append(head,cardsBox);dynamicSections.appendChild(section);
- });
- document.getElementById("noresults").classList.toggle("hidden",visible!==0);
- count.textContent=visible+" tool"+(visible===1?"":"s");
+  const q=search.value.trim().toLowerCase();
+  langBox.innerHTML="";
+  creativeBox.innerHTML="";
+  dynamicSections.innerHTML="";
+  const groups=new Map();
+  let visible=0;
+
+  TOOLS.forEach((t,i)=>{
+    if(!t || !t.url) return;
+    const info=toolInfo(t);
+    if(q && !((info.name+" "+info.description+" "+info.tag+" "+info.category+" "+t.url).toLowerCase().includes(q))) return;
+    visible++;
+    const c=card(t,i);
+
+    // Preserve the two original main sections, while grouping all other inferred categories below.
+    if(info.category.startsWith("💻")) langBox.appendChild(c);
+    else if(info.category.startsWith("🎨")) creativeBox.appendChild(c);
+    else {
+      if(!groups.has(info.category)) groups.set(info.category,[]);
+      groups.get(info.category).push(c);
+    }
+  });
+
+  document.getElementById("languageSection").classList.toggle("hidden",langBox.children.length===0);
+  document.getElementById("creativeSection").classList.toggle("hidden",creativeBox.children.length===0);
+
+  groups.forEach((cards,heading)=>{
+    const section=document.createElement("section");
+    section.className="section";
+    const head=document.createElement("div");
+    head.className="section-head";
+    const left=document.createElement("div");
+    const h=document.createElement("h3");
+    h.textContent=heading;
+    const p=document.createElement("p");
+    p.textContent="Websites automatically grouped by their URL and purpose";
+    left.append(h,p);
+    const badge=document.createElement("span");
+    badge.className="section-badge";
+    badge.textContent="AUTO CATEGORY";
+    head.append(left,badge);
+    const cardsBox=document.createElement("div");
+    cardsBox.className="cards";
+    cards.forEach(c=>cardsBox.appendChild(c));
+    section.append(head,cardsBox);
+    dynamicSections.appendChild(section);
+  });
+
+  document.getElementById("noresults").classList.toggle("hidden",visible!==0);
+  count.textContent=visible+" tool"+(visible===1?"":"s");
 }
 function openTool(i){ openExternal(TOOLS[i].url); }
 function closeTool(){viewer.classList.remove("show");frame.src="";frame.srcdoc="";current=-1}
