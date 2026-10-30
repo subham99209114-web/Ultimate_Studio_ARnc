@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07111f">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RCQYE1MEEJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RCQYE1MEEJ');
+</script>
+
+<title>Ultimate Studio.ARnc — All Tools</title>
+<style>
+:root{
+ --bg:#07111f;--bg2:#101a33;--card:#14213d;--card2:#18294a;--line:#36517d;
+ --text:#f8fbff;--heading:#ffffff;--muted:#b9c9df;--soft:#e5efff;
+ --blue:#00b7ff;--cyan:#00e5ff;--violet:#8b5cf6;--pink:#ff3cac;
+ --green:#00d68f;--orange:#ff9f43;--yellow:#ffd166;--shadow:0 25px 80px rgba(0,0,0,.38)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;min-height:100%;font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);
+ background:
+ radial-gradient(circle at 8% 12%,rgba(0,229,255,.22),transparent 22%),
+ radial-gradient(circle at 90% 8%,rgba(255,60,172,.20),transparent 23%),
+ radial-gradient(circle at 78% 75%,rgba(139,92,246,.18),transparent 26%),
+ linear-gradient(135deg,#07111f 0%,#0c1830 38%,#11152e 68%,#081b27 100%);
+ background-attachment:fixed;
+ -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden
+}
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+ background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+ background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 85%)
+}
+button,input{font:inherit}button{color:inherit}.app{min-height:100vh}
+
+.topbar{
+ position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:13px;padding:12px 22px;
+ background:linear-gradient(90deg,rgba(8,17,36,.96),rgba(19,15,43,.94),rgba(6,27,39,.96));
+ backdrop-filter:blur(22px);border-bottom:1px solid rgba(113,202,255,.24);
+ box-shadow:0 10px 35px rgba(0,0,0,.24)
+}
+.logo{
+ width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font-weight:1000;font-size:21px;color:#fff;
+ background:linear-gradient(135deg,#ff3cac 0%,#784cff 45%,#00e5ff 100%);
+ box-shadow:0 12px 35px rgba(80,120,255,.35)
+}
+.brand h1{margin:0;color:#fff;font-size:19px;letter-spacing:-.3px;font-weight:850}
+.brand small{color:#c7d7ef;font-size:11px}
+.top-actions{margin-left:auto;display:flex;gap:7px}
+.topbtn{
+ border:1px solid #3b5883;background:linear-gradient(135deg,#172846,#101c35);color:#f4f8ff;
+ padding:8px 11px;border-radius:10px;cursor:pointer;font-weight:750;transition:.18s
+}
+.topbtn:hover{background:linear-gradient(135deg,#24416d,#18294b);border-color:#6a91cc;transform:translateY(-1px)}
+.topbtn.primary{border:0;background:linear-gradient(135deg,#ff3cac,#784cff 50%,#00c8ff);font-weight:900}
+
+.hero{padding:52px 20px 28px;text-align:center}
+.eyebrow{
+ display:inline-flex;padding:8px 14px;border-radius:999px;border:1px solid rgba(112,222,255,.38);
+ background:linear-gradient(90deg,rgba(0,229,255,.10),rgba(139,92,246,.14),rgba(255,60,172,.10));
+ color:#dff8ff;font-size:11px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;
+ box-shadow:0 8px 30px rgba(0,229,255,.08)
+}
+.hero h2{
+ color:#fff;font-size:clamp(36px,6vw,68px);line-height:1.02;letter-spacing:-2.8px;margin:18px auto 13px;max-width:950px
+}
+.hero h2 span{
+ background:linear-gradient(90deg,#61efff,#8e72ff,#ff68bd,#ffd166);
+ -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero p{max-width:760px;margin:auto;color:#c1d0e6;font-size:15px;line-height:1.75}
+
+.shell{width:min(1450px,calc(100% - 32px));margin:auto}
+.searchbox{
+ position:sticky;top:70px;z-index:20;margin:8px 0 28px;padding:10px;
+ border:1px solid rgba(101,159,226,.35);border-radius:20px;
+ background:linear-gradient(100deg,rgba(10,29,50,.97),rgba(29,19,55,.96),rgba(8,35,48,.97));
+ backdrop-filter:blur(20px);box-shadow:0 20px 55px rgba(0,0,0,.30);
+ display:flex;gap:10px;align-items:center
+}
+.searchicon{font-size:23px;margin-left:5px;color:#72efff}
+.searchbox input{
+ flex:1;min-width:0;border:0;outline:0;background:transparent;color:#fff;
+ font-size:16px;font-weight:600;padding:9px
+}
+.searchbox input::placeholder{color:#9fb3d0;opacity:1}
+.count{
+ font-size:11px;color:#e3efff;border:1px solid #46638d;padding:6px 10px;border-radius:999px;
+ white-space:nowrap;background:rgba(22,40,68,.9)
+}
+
+.section{margin:30px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:14px}
+.section-head h3{margin:0;color:#fff;font-size:21px;font-weight:900}
+.section-head p{margin:4px 0 0;color:#b8c9df;font-size:12px}
+.section-badge{
+ font-size:11px;color:#e5f1ff;background:linear-gradient(135deg,#182c4d,#241c48);
+ border:1px solid #47658f;padding:6px 10px;border-radius:999px;font-weight:850
+}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.tool-card{
+ position:relative;min-height:160px;border:1px solid #304a72;border-radius:19px;padding:18px;
+ background:linear-gradient(145deg,rgba(24,42,72,.97),rgba(15,25,49,.97));
+ box-shadow:0 15px 45px rgba(0,0,0,.28);overflow:hidden;cursor:pointer;
+ transition:.22s transform,.22s border-color,.22s box-shadow;text-align:left;color:#fff
+}
+.tool-card:after{
+ content:"";position:absolute;inset:auto -45px -55px auto;width:150px;height:150px;border-radius:50%;
+ background:var(--glow,#00c8ff);opacity:.08;filter:blur(8px);pointer-events:none
+}
+.tool-card:before{
+ content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.035) 45%,transparent 70%);
+ transform:translateX(-100%);transition:.5s;pointer-events:none
+}
+.tool-card:hover{
+ transform:translateY(-7px);border-color:#6a91ca;box-shadow:0 24px 60px rgba(0,0,0,.40)
+}
+.tool-card:hover:before{transform:translateX(100%)}
+.tool-card:focus-visible{outline:3px solid #62eaff;outline-offset:3px}
+.icon{
+ width:47px;height:47px;border-radius:15px;display:grid;place-items:center;font-size:23px;margin-bottom:14px;
+ background:linear-gradient(135deg,var(--accent,#4f8cff),var(--accent2,#00d9ff));
+ box-shadow:0 12px 28px rgba(0,0,0,.28)
+}
+.tool-card h4{margin:0 0 6px;color:#fff;font-size:15px;font-weight:900}
+.tool-card p{margin:0;color:#c5d3e7;font-size:11px;line-height:1.6}
+.tool-card small{color:#a9bdd8!important}
+.open{position:absolute;right:14px;bottom:14px;color:#d9ebff;font-size:11px;font-weight:900}
+.hidden{display:none!important}
+.noresults{
+ text-align:center;color:#c9d8eb;padding:42px;border:1px dashed #496589;border-radius:18px;
+ background:linear-gradient(135deg,#101f38,#1b1739)
+}
+
+.viewer{display:none;position:fixed;inset:0;z-index:100;background:#040711}
+.viewer.show{display:block}
+.viewer-head{
+ height:58px;display:flex;align-items:center;gap:10px;padding:8px 12px;
+ background:linear-gradient(90deg,#0b1930,#21143c,#092b35);border-bottom:1px solid #3b567d
+}
+.viewer-title{font-weight:900;color:#fff}.viewer-head .spacer{flex:1}
+.close{
+ border:1px solid #456084;background:#172844;color:#fff;padding:8px 12px;border-radius:9px;cursor:pointer;font-weight:800
+}
+.close:hover{background:#264167}
+.viewer iframe{width:100%;height:calc(100% - 58px);border:0;background:#fff}
+.loading{position:absolute;inset:58px 0 0;display:none;place-items:center;background:#050811ee;z-index:3}
+.loading.show{display:grid}
+.spinner{width:44px;height:44px;border:4px solid #3a506f;border-top-color:#65eaff;border-right-color:#ff5dbb;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+
+footer{
+  margin-top:55px;padding:48px 20px 24px;border-top:1px solid rgba(113,202,255,.28);
+  background:
+    radial-gradient(circle at 10% 0%,rgba(0,229,255,.09),transparent 25%),
+    radial-gradient(circle at 90% 15%,rgba(255,60,172,.08),transparent 27%),
+    linear-gradient(135deg,#071322,#12142c 50%,#071b25);
+  color:#b9c9df;font-size:13px;line-height:1.85;text-align:left
+}
+.footer-wrap{width:min(1450px,calc(100% - 10px));margin:auto}
+.footer-brand{text-align:center;padding:0 10px 28px}
+.footer-brand h2{margin:0 0 8px;color:#fff;font-size:26px;font-weight:950}
+.footer-brand p{max-width:900px;margin:0 auto;color:#b9c9df;font-size:13px;line-height:1.8}
+.footer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:12px}
+.footer-panel{
+  border:1px solid rgba(106,145,202,.34);border-radius:22px;padding:28px;
+  background:linear-gradient(145deg,rgba(20,38,68,.88),rgba(13,25,49,.88));
+  box-shadow:0 18px 55px rgba(0,0,0,.22)
+}
+.footer-panel h3{margin:0 0 16px;color:#fff;font-size:22px;font-weight:950}
+.footer-panel h4{margin:22px 0 7px;color:#72efff;font-size:15px;font-weight:900}
+.footer-panel p{margin:0 0 12px;color:#c0cfe3}
+.footer-panel ul{margin:8px 0 14px;padding-left:22px;color:#c0cfe3}
+.footer-panel li{margin:6px 0}
+.footer-note{
+  margin-top:22px;padding:16px 18px;border-radius:15px;
+  border:1px solid rgba(255,209,102,.28);
+  background:rgba(255,209,102,.055);color:#dce8f7
+}
+.footer-bottom{text-align:center;margin-top:26px;padding-top:20px;border-top:1px solid rgba(128,128,128,.22);color:#9fb3d0}
+.footer-bottom strong{color:#eaf5ff}
+body.light footer{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(0,183,255,.10),transparent 25%),
+    radial-gradient(circle at 90% 15%,rgba(255,60,172,.08),transparent 27%),
+    linear-gradient(135deg,#eaf4ff,#f3edff 50%,#e8fff7);
+  color:#53647c
+}
+body.light .footer-panel{background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(239,246,255,.94));border-color:#c6d7ea}
+body.light .footer-brand h2,body.light .footer-panel h3{color:#101b31}
+body.light .footer-panel h4{color:#087fa1}
+body.light .footer-panel p,body.light .footer-panel li{color:#53647c}
+body.light .footer-bottom{color:#64758b}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr}.footer-panel{padding:21px}}
+
+body.light{
+ --bg:#eef6ff;--bg2:#eaf1ff;--line:#bfd0e5;--text:#17243a;--heading:#0c1930;--muted:#56667e
+}
+body.light{
+ background:
+ radial-gradient(circle at 8% 12%,rgba(0,183,255,.18),transparent 22%),
+ radial-gradient(circle at 90% 8%,rgba(255,60,172,.14),transparent 23%),
+ linear-gradient(135deg,#eef8ff,#f3efff 50%,#eafff8)
+}
+body.light .topbar,body.light .searchbox{background:rgba(255,255,255,.95);border-color:#c2d3e8}
+body.light .brand h1,body.light .hero h2,body.light .section-head h3{color:#101b31}
+body.light .brand small,body.light .hero p,body.light .section-head p{color:#52637b}
+body.light .tool-card{background:linear-gradient(145deg,#fff,#edf5ff);border-color:#c6d7ea}
+body.light .tool-card h4{color:#101b31}
+body.light .tool-card p{color:#53647c}
+body.light .searchbox input{color:#152238}
+body.light .searchbox input::placeholder{color:#71819a}
+body.light footer{background:linear-gradient(90deg,#eaf4ff,#f3edff,#e8fff7);color:#53647c}
+
+@media(max-width:1100px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .top-actions .hide-sm{display:none}.hero{padding-top:34px}.searchbox{top:65px}
+}
+@media(max-width:480px){
+ .cards{grid-template-columns:1fr}.shell{width:min(100% - 20px,1450px)}
+ .brand small{display:none}.topbar{padding:9px 11px}.hero h2{letter-spacing:-1.5px}
+ .section-head{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="logo">AR</div>
+  <div class="brand"><h1>ARnc Ultimate Studio</h1><small>Professional All‑in‑One Creative & Developer Workspace</small></div>
+  <div class="top-actions">
+    <button class="topbtn hide-sm" id="homeBtn">⌂ Home</button>
+    <button class="topbtn" id="themeBtn">☀️ Theme</button>
+    <button class="topbtn primary" id="fullBtn">⛶ Fullscreen</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">✦ 14 Professional Studios in One Place</div>
+  <h2>Everything you need, <span>beautifully organized.</span></h2>
+  <p>Search any studio below. All programming-language tools are grouped together, while image, PDF and conversion tools have their own dedicated sections.</p>
+</section>
+
+<div class="shell">
+  <div class="searchbox">
+    <span class="searchicon">⌕</span>
+    <input id="search" autocomplete="off" placeholder="Search tools… Python, Java, PDF, image, resize, background">
+    <span class="count" id="count">14 tools</span>
+  </div>
+
+  <section class="section" id="languageSection">
+    <div class="section-head">
+      <div><h3>💻 Programming Languages & Web Development</h3><p>All coding and live-preview studios in one place</p></div>
+      <span class="section-badge">LANGUAGES</span>
+    </div>
+    <div class="cards" id="languageCards"></div>
+  </section>
+
+  <section class="section" id="creativeSection">
+    <div class="section-head">
+      <div><h3>🎨 Image, PDF & Utility Studios</h3><p>Editing, resizing, conversion, merging and background tools</p></div>
+      <span class="section-badge">CREATIVE + PDF</span>
+    </div>
+    <div class="cards" id="creativeCards"></div>
+  </section>
+
+  <div id="dynamicSections"></div>
+  <div class="noresults hidden" id="noresults">No matching studio found. Try another keyword.</div>
+</div>
+
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-brand">
+      <h2>ARnc Ultimate Studio</h2>
+      <p>A continuously expandable, colorful, professional platform designed to bring an evolving collection of websites, studios, utilities, and digital workspaces together in one organized environment.</p>
+    </div>
+    <div class="footer-grid">
+      <section class="footer-panel">
+        <h3>📘 About Website</h3>
+        
+<p>ARnc Ultimate Studio is envisioned as a continuously expandable, all-in-one digital workspace where different professional, educational, creative, development, productivity, conversion, document, media, and utility websites or studios can be brought together under one organized platform. The purpose of this website is not limited to the tools that are available today. Its structure is designed so that additional websites, studios, utilities, and specialized workspaces can be added in the future while the central ARnc Ultimate Studio experience continues to provide one consistent place for discovering and accessing them.</p>
+
+<h4>A growing platform rather than a fixed collection</h4>
+<p>The website should be understood as an expandable platform. The current collection represents only the beginning of the overall concept. As new websites and studios are added in future versions, the platform can grow into a broader collection covering additional areas of programming, web development, design, image processing, documents, PDFs, education, productivity, file management, conversion, media, and other useful categories. The goal is to make the expansion feel natural so that newly added websites become part of the same organized ecosystem instead of creating a disconnected collection of pages.</p>
+
+<h4>Future websites and studios</h4>
+<p>Future additions may introduce completely different types of functionality from the tools currently available. A new studio may be focused on development, another may provide a creative workspace, another may work with documents or files, and another may serve a specialized professional or educational purpose. Because the platform is intended to grow over time, the About Website information is deliberately written around the overall concept and architecture of ARnc Ultimate Studio rather than being restricted to any particular list of currently included websites.</p>
+
+<h4>One central experience</h4>
+<p>The central idea is to provide users with one recognizable interface through which they can discover and open many different websites or workspaces. The platform can organize future additions into meaningful categories, provide search and filtering, present descriptive cards, and offer consistent navigation. This approach can make a large collection easier to understand because users do not need to remember a separate location for every individual website that becomes part of the platform.</p>
+
+<h4>Organization and discoverability</h4>
+<p>As the platform grows, organization becomes increasingly important. Future websites can be grouped according to their purpose, technology, subject, workflow, or other useful classification. Search and filtering can help users locate a particular website even when the total number of available resources becomes large. Descriptions can explain what a website is intended for, while visual labels can help distinguish different categories. The overall objective is to maintain clarity even as the collection becomes significantly larger than its initial version.</p>
+
+<h4>Consistent and professional design</h4>
+<p>Future additions are intended to coexist with the main ARnc Ultimate Studio interface while allowing each individual website or studio to retain its own specialized functionality. The central platform can provide a consistent visual framework, navigation system, responsive behavior, and workspace-opening experience. This makes the collection feel like one professional ecosystem while still allowing different websites to perform completely different jobs.</p>
+
+<h4>Built for continued development</h4>
+<p>ARnc Ultimate Studio is intended to evolve through future updates. New websites can be introduced, existing workspaces can be improved, categories can be expanded, descriptions can be refined, and additional platform features can be introduced as the project develops. The long-term purpose is to create a flexible foundation that does not need to be redesigned every time a new website is added. Instead, the platform should make expansion an expected part of its normal operation.</p>
+
+<h4>Useful for different kinds of users</h4>
+<p>Because future websites may cover many different subjects, the platform can serve a wide range of users. Students may find educational or programming resources, developers may use technical workspaces, creators may use design and media utilities, professionals may use productivity and document tools, and general users may find everyday utilities. The platform does not need to be limited to one audience or one category of software; its broader purpose is to provide a well-organized home for useful browser-based resources.</p>
+
+<h4>Accessibility, responsiveness, and usability</h4>
+<p>As new websites are introduced, the platform can continue to prioritize clear navigation, readable information, responsive layouts, practical controls, and an interface that works across different screen sizes. Future improvements can also focus on keyboard navigation, clearer labels, loading feedback, error handling, search improvements, and other usability details. These principles help the platform remain useful even as the number and variety of available websites increase.</p>
+
+<h4>Future expansion without changing the central purpose</h4>
+<p>The collection may become much larger over time, but its central purpose remains the same: organize useful websites and digital workspaces into one accessible, professional, and expandable environment. The platform can continue to add new categories and specialized resources without losing its identity. This makes the current website a foundation for future growth rather than a final, closed product.</p>
+
+<h4>What users can expect from future versions</h4>
+<p>Future versions may contain additional websites, new categories, improved search, richer descriptions, improved navigation, better responsive behavior, additional workspace controls, new productivity features, and other improvements. The exact features of future additions may differ substantially from one another, so each website should be considered according to its own purpose and documentation. The overall platform, however, is intended to continue providing a single organized point of access to an expanding collection of resources.</p>
+
+<h4>Long-term vision</h4>
+<p>The long-term vision of ARnc Ultimate Studio is to become a broad, organized, and continuously evolving digital workspace where users can discover many useful websites from one professional platform. The project is therefore designed with expansion in mind. The websites available today should be viewed as part of a larger journey rather than as the final definition of what ARnc Ultimate Studio can contain.</p>
+
+      </section>
+      <section class="footer-panel">
+        <h3>🔐 Privacy Policy</h3>
+        
+<p>This Privacy Policy describes the privacy principles intended for ARnc Ultimate Studio as an expandable platform that may contain many different websites, studios, utilities, and workspaces in the future. Because additional websites may be added over time, privacy should not be described only according to the functionality available today. Each future website may have different technical behavior, storage methods, network requirements, third-party services, and privacy considerations. This policy therefore establishes a general privacy framework for the platform while recognizing that individual websites may require additional, specific privacy information.</p>
+
+<h4>Privacy across an expanding platform</h4>
+<p>ARnc Ultimate Studio is intended to grow by adding additional websites and workspaces. As the collection grows, the privacy characteristics of individual additions may also differ. Some websites may operate primarily within the browser, some may require external resources, some may process files locally, and others may communicate with their own servers or third-party services. Users should therefore understand that the central platform and an individual website are not necessarily the same data-processing environment.</p>
+
+<h4>Information users may provide</h4>
+<p>Depending on the website being used, a user may enter text, source code, documents, images, files, project information, search terms, or other content. The platform should not assume that every future website handles this information in exactly the same way. Before entering confidential or sensitive information, users should review the relevant website's privacy information and determine whether the website processes information locally or sends information to another service.</p>
+
+<h4>Local processing</h4>
+<p>Some future websites may be designed to perform their work locally within the browser. When a website is genuinely client-side and does not transmit user content to an external service, the content may remain on the user's device during processing. However, the existence of a browser interface alone is not enough to guarantee local-only processing. External scripts, analytics, APIs, remote resources, hosting services, or other integrations may create network activity. Privacy-sensitive users should verify the actual implementation and network behavior of the particular website.</p>
+
+<h4>Browser storage and local data</h4>
+<p>Individual websites may use browser storage for preferences, temporary information, saved projects, recent settings, or other convenience features. Browser storage is controlled by the browser and the website environment and can be affected by clearing site data, changing browsers, using private browsing modes, storage limits, or other browser settings. Users should not treat browser storage as a guaranteed permanent backup. Important information should be stored separately in an appropriate location.</p>
+
+<h4>Files and documents</h4>
+<p>Future websites may provide file-related functionality such as editing, conversion, previewing, merging, resizing, exporting, or other processing. The way a file is handled can differ between websites. A file may be processed locally, temporarily loaded into browser memory, saved through browser storage, downloaded to the user's device, or transmitted to a remote service depending on the implementation. Users should check the individual website before using confidential, personal, financial, business, or otherwise sensitive files.</p>
+
+<h4>Third-party services and external resources</h4>
+<p>Some future websites may depend on third-party libraries, APIs, analytics services, hosting providers, fonts, content delivery networks, authentication providers, cloud storage, or other external systems. If a website communicates with a third party, information associated with that communication may be governed by the third party's own policies. ARnc Ultimate Studio should not make a blanket promise that all future websites are independent of external services. Each addition should be reviewed according to its actual technical dependencies.</p>
+
+<h4>Analytics and measurement</h4>
+<p>Future versions may or may not contain analytics or measurement systems depending on how the platform is developed and which websites are added. If analytics are introduced, the relevant website should clearly document the categories of information collected, the purpose of the measurement, the service provider involved, and the available privacy controls where applicable. Users who require minimal tracking should review the relevant website's privacy information and browser settings before use.</p>
+
+<h4>Accounts and authentication</h4>
+<p>Future websites may potentially introduce accounts, sign-in systems, authentication, profiles, or other personalized functionality. If that happens, additional information such as account identifiers, email addresses, preferences, authentication records, or account activity may be processed. Such functionality should have specific privacy documentation explaining what is collected, why it is needed, how it is protected, and how long it is retained. Users should never reuse sensitive passwords in an unfamiliar service and should follow appropriate account-security practices.</p>
+
+<h4>Security</h4>
+<p>No website or browser-based platform should be described as completely risk-free. Security can depend on application code, browser security, operating-system security, hosting, third-party services, network configuration, dependencies, browser extensions, and user behavior. Future websites should be reviewed and maintained as they are added. Users should keep software updated, avoid exposing credentials in client-side code, use strong and unique passwords where accounts exist, and avoid entering highly sensitive information into websites that have not been independently verified.</p>
+
+<h4>Children, students, and educational use</h4>
+<p>If future websites are used by students or younger users, the privacy requirements of the relevant school, organization, family, and jurisdiction should be considered. Sensitive student records, personal identifiers, passwords, private communications, and other unnecessary personal information should not be entered into general-purpose websites without appropriate authorization and privacy review. Any future website intended specifically for educational use should have privacy information appropriate to the data it actually handles.</p>
+
+<h4>Data retention</h4>
+<p>Retention can differ between websites. Temporary browser data may disappear when a page is closed, while browser storage may persist until it is cleared. Downloaded files may remain on the user's device. Remote services may retain information according to their own policies and operational requirements. Because ARnc Ultimate Studio may eventually contain many independent websites, there cannot be one universal retention period for every type of information unless the platform is specifically redesigned to enforce one.</p>
+
+<h4>User control</h4>
+<p>Users can reduce privacy exposure by providing only the information necessary for a task, using non-sensitive sample data when possible, reviewing permissions, managing browser storage, controlling extensions, checking external network requests when appropriate, and reading the privacy information for individual websites. When a task involves confidential material, users should choose a website or workflow that has been specifically verified for the required privacy level.</p>
+
+<h4>Privacy information for future additions</h4>
+<p>Whenever a new website is added to ARnc Ultimate Studio, its privacy characteristics should be considered as part of the addition process. If the new website collects information, uses analytics, requires accounts, communicates with an API, stores files remotely, or introduces another meaningful data flow, its specific privacy information should be documented rather than relying only on this general platform policy. This keeps the overall policy useful while allowing each future website to accurately describe its own behavior.</p>
+
+<h4>Changes to this Privacy Policy</h4>
+<p>Because ARnc Ultimate Studio is intended to expand, this Privacy Policy may need to evolve as new websites, technologies, integrations, and features are introduced. Material changes to data collection, storage, analytics, accounts, remote processing, or third-party services should be reflected in an updated privacy notice. The most accurate privacy statement is always the one that matches the actual version of the deployed platform and the actual websites included in that version.</p>
+
+<div class="footer-note"><strong>Privacy reminder:</strong> The addition of a future website does not automatically mean that it follows the same data-processing model as every other website in the platform. Before entering sensitive information, users should review the privacy information and data flow of the particular website they are opening.</div>
+
+      </section>
+    </div>
+    <div class="footer-bottom">
+      <strong>ARnc Ultimate Studio</strong> • An expandable platform for an evolving collection of websites and digital workspaces.<br>
+      
+      Contact us:
+      Website: Ultimate Studio.ARnc
+      Privacy / Support Email: subham99209114@gmail.com
+      Contact no: 7544095688 <br>
+
+      © 2026 ARnc Ultimate Studio. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<div class="viewer" id="viewer">
+  <div class="viewer-head">
+    <span class="viewer-title" id="viewerTitle">Studio</span><span class="spacer"></span>
+    <button class="close" id="reloadTool">↻ Reload</button>
+    <button class="close" id="closeViewer">✕ Close</button>
+  </div>
+  <div class="loading" id="loading"><div><div class="spinner"></div><div style="text-align:center;margin-top:10px;color:#aab8d0;font-size:12px">Loading studio…</div></div></div>
+  <iframe id="studio" title="ARnc Studio"></iframe>
+</div>
+
+<script>
+const TOOLS = [{"id":"Tool0","name":"C / C# / C++ Studio","url":"https://subham99209114-web.github.io/C_C-_C-_Code_Studio_ARnc/","external":true},{"id":"Tool1","name":"Java Studio Pro","url":"https://subham99209114-web.github.io/Java_Studio_Pro_ARnc/","external":true},{"id":"Tool2","name":"PHP Studio Pro","url":"https://subham99209114-web.github.io/PHP_Studio_Pro_ARnc/","external":true},{"id":"Tool3","name":"Python Studio","url":"https://subham99209114-web.github.io/Python_Studio_ARnc/","external":true},{"id":"Tool4","name":"HTML Live Preview","url":"https://subham99209114-web.github.io/html_live_preview_generator_ARnc/","external":true},{"id":"Tool5","name":"Format Converter","url":"https://subham99209114-web.github.io/Format_Converter_Studio_ARnc/","external":true},{"id":"Tool6","name":"Image → PDF","url":"https://subham99209114-web.github.io/Image_to_PDF_Studio_ARnc/","external":true},{"id":"Tool7","name":"Image Workspace","url":"https://subham99209114-web.github.io/Image_Workspace_ARnc/","external":true},{"id":"Tool8","name":"Merge Studio","url":"https://subham99209114-web.github.io/Merge_Studio_ARnc/","external":true},{"id":"Tool9","name":"PDF → Image","url":"https://subham99209114-web.github.io/pdf_to_image_converter_ARnc/","external":true},{"id":"Tool10","name":"Photo Editor","url":"https://subham99209114-web.github.io/Photo_Editor_ARnc/","external":true},{"id":"Tool11","name":"Background Remover","url":"https://subham99209114-web.github.io/Remove_Background_ARnc/","external":true},{"id":"Tool12","name":"Resize Image","url":"https://subham99209114-web.github.io/image-resize-arnc/","external":true},{"id":"Tool13","name":"Image Resizer Pro","url":"https://subham99209114-web.github.io/image_resizer_in/","external":true},{"id":"Tool14","name":"Upload Website","url":"https://subham99209114-web.github.io/AppVerse_ARnc/","external":true},{"id":"Tool15","name":"Translator Website","url":"https://subham99209114-web.github.io/TranLang_ARnc/","external":true},{"id":"Tool16","name":"Game","url":"https://subham99209114-web.github.io/Gaming_ARnc/","external":true},{"id":"Tool17","name":"Competitive Exam Books","url":"https://subham99209114-web.github.io/Competitive_Exam_ARnc/","external":true},{"id":"Tool18","name":"AI Tools","url":"https://subham99209114-web.github.io/AI_Tool_ARnc/","external":true},{"id":"Tool19","name":"Learning Programming Language","url":"https://subham99209114-web.github.io/LearnCodex_ARnc/","external":true}];
+
+// NAYA URL ADD KARNE KA TARIKA:
+// {"id":"tool18","name":"Optional Website Name","url":"https://example.com","external":true}
+// URL, website name aur purpose keywords se category infer hoti hai.
+// Sabse accurate result ke liye TOOLS item mein optional name aur category bhi dein.
+// Example: {id:"custom1",name:"My Translator",url:"https://example.com",category:"🌍 Translation & Language Tools",external:true}
+// Explicit category URL guesses se zyada priority leti hai.
+
+const languageNames = new Set([
+  "C / C# / C++ Studio","Java Studio Pro","PHP Studio Pro","Python Studio","HTML Live Preview"
+]);
+const meta = {
+ "C / C# / C++ Studio":["💻","Multi-language coding workspace","C / C++ / C#","#7c3aed","#00d9ff"],
+ "Java Studio Pro":["☕","Java coding and live workspace","Java","#f97316","#ef4444"],
+ "PHP Studio Pro":["🐘","Full-screen PHP development studio","PHP","#6366f1","#22d3ee"],
+ "Python Studio":["🐍","Python editor with live execution","Python","#f5b400","#3776ab"],
+ "HTML Live Preview":["🌐","Write HTML and see it live","HTML","#f97316","#ff4d6d"],
+ "Format Converter":["🔄","Convert supported file formats","Converter","#06b6d4","#8b5cf6"],
+ "Image → PDF":["📄","Turn images into PDF documents","PDF","#ec4899","#8b5cf6"],
+ "Image Workspace":["🖼️","Advanced image workspace","Image","#00c2ff","#7c3aed"],
+ "Merge Studio":["🔗","Merge images and PDF files","PDF / Image","#20e39a","#00b8ff"],
+ "PDF → Image":["📑","Render PDF pages as images","PDF","#ff5f6d","#ffc371"],
+ "Photo Editor":["🎨","Professional photo editing workspace","Editor","#ff4d8d","#7c5cff"],
+ "Background Remover":["✂️","Select and remove image backgrounds","Image","#20e39a","#06b6d4"],
+ "Resize Image":["📐","Resize, compress and crop images","Image","#22c55e","#06b6d4"],
+ "Image Resizer Pro":["⚡","Professional image resizing studio","Image","#2563eb","#8b5cf6"]
+};
+const langBox=document.getElementById("languageCards"), creativeBox=document.getElementById("creativeCards");
+const dynamicSections=document.getElementById("dynamicSections");
+const search=document.getElementById("search"), count=document.getElementById("count");
+const viewer=document.getElementById("viewer"), frame=document.getElementById("studio"), loading=document.getElementById("loading"), title=document.getElementById("viewerTitle");
+let current=-1;
+
+// URL ke purpose ko score karke best category, icon aur readable title chunta hai.
+function inferTool(t){
+ const raw=String(t.url||"").trim();
+ let u;
+ try{
+   u=new URL(raw);
+   if(!/^https?:$/.test(u.protocol)) throw new Error("Unsupported URL");
+ }catch(e){
+   return {name:t.name||"New Website",category:"🌐 Other Websites",icon:"🌐",description:"Add a valid http:// or https:// URL",tag:"Check URL",accent:"#4f8cff",accent2:"#00d9ff"};
+ }
+ const clean=v=>String(v||"").replace(/%[0-9a-f]{2}/gi," ").replace(/[?#=&]/g," ").replace(/[_-]+/g," ").replace(/\.(html?|php|aspx?|jsp)$/ig," ").replace(/\s+/g," ").trim().toLowerCase();
+ const hostingProvider=/(^|\.)(github\.io|gitlab\.io|pages\.dev|netlify\.app|vercel\.app|web\.app|firebaseapp\.com|wordpress\.com|blogspot\.com)$/i.test(u.hostname);
+ const host=clean(u.hostname.replace(/^www\./i,"").replace(/\.(com|org|net|io|app|dev|co|in|ai|edu|gov)$/i,"").replace(/[.-]+/g," "));
+ const segments=u.pathname.split("/").filter(Boolean);
+ const path=clean(segments.slice(-1)[0]||"");
+ const githubPath=hostingProvider ? clean(segments[0]||"") : "";
+ const nameText=clean(t.name||"");
+ // Give human-provided name/purpose the most weight. Ignore hosting-provider words such as GitHub Pages.
+ const primarySignal=clean([t.name||"",t.purpose||"",t.description||""].join(" "));
+ const projectSignal=clean([githubPath,hostingProvider?"":host].join(" "));
+ const routeSignal=clean([u.pathname,u.search,u.hash].join(" "));
+ const signal=clean([primarySignal,projectSignal,routeSignal].join(" "));
+ const rules=[
+  {id:"translation",category:"🌍 Translation & Language Tools",tag:"Translation / Languages",icon:"🌍",description:"Translate text and work with languages, OCR and multilingual content",accent:"#14b8a6",accent2:"#3b82f6",words:["language translator","image translator","translate image","translate photo","image translation","text translator","website translator","translation tool","translator","translate","translation","translang","language translation","multilingual","localization","ocr translator"]},
+  {id:"gamingportal",category:"🎮 Games & Entertainment",tag:"Gaming Portal",icon:"🎮",description:"Browse and play games and entertainment experiences",accent:"#8b5cf6",accent2:"#ec4899",words:["gaming portal","game portal","online games","browser games","play games","game website","gaming website","games website","crazygames","poki","game hub","gaming"]},
+  {id:"imageutility",category:"🖼️ Image Tools & Editors",tag:"Image Tools",icon:"🖼️",description:"Resize, edit, convert, enhance or process images",accent:"#06b6d4",accent2:"#8b5cf6",words:["image resizer","resize image","image resize","photo editor","image editor","background remover","remove background","image compressor","image converter","image to pdf","pdf to image","image workspace","photo tools","image tools"]},
+  {id:"fileconverter",category:"🔄 File & Format Converters",tag:"File Converter",icon:"🔄",description:"Convert files between supported formats",accent:"#06b6d4",accent2:"#8b5cf6",words:["format converter","file converter","document converter","convert files","file conversion","format conversion","converter studio"]},
+  {id:"code",category:"💻 Programming Languages & Web Development",tag:"Programming",icon:"💻",description:"Write, edit, test or preview code and websites",accent:"#7c3aed",accent2:"#00d9ff",words:["javascript","typescript","web development","html live preview","code studio","coding","compiler","programming","developer","python","java","php","html","css","react","node js","github","gitlab","ide","code editor","code","api","sql"]},
+  {id:"imagepdf",category:"🎨 Image, PDF & Utility Studios",tag:"Image / PDF / Utility",icon:"🧰",description:"Edit, resize, convert or organize images and files",accent:"#06b6d4",accent2:"#8b5cf6",words:["image to pdf","jpg to pdf","png to pdf","pdf to image","pdf to jpg","pdf to png","image resizer","resize image","photo editor","background remover","remove background","image compressor","compress image","image cropper","merge pdf","pdf merger","file merger","format converter","file converter","pdf converter","image editor","image workspace","image resize","resizeimage","imageresizer","image","photo","picture","pdf","png","jpeg","jpg","resize","compress","merge","crop","converter","convert","format"]},
+  {id:"ai",category:"🤖 AI Tools",tag:"AI Tools",icon:"🤖",description:"AI assistants, generators and intelligent tools",accent:"#06b6d4",accent2:"#7c3aed",words:["artificial intelligence","machine learning","ai image generator","ai video generator","ai writer","ai assistant","ai chatbot","chatgpt","chatbot","image generator","video generator","text generator","prompt generator","llm","openai","gemini","copilot","perplexity","stable diffusion"]},
+  {id:"games",category:"🎮 Games & Entertainment",tag:"Games & Entertainment",icon:"🎮",description:"Play games and explore entertainment experiences",accent:"#8b5cf6",accent2:"#ec4899",words:["endless runner","racing game","car game","scooter game","game development","game maker","gaming","arcade","racing","runner","puzzle","game","play"]},
+  {id:"media",category:"🎬 Video & Audio Tools",tag:"Video / Audio",icon:"🎬",description:"Create, edit, convert or process video and audio",accent:"#ec4899",accent2:"#8b5cf6",words:["text to speech","speech to text","voice recorder","video editor","video converter","audio converter","youtube downloader","subtitle maker","music player","video","audio","music","mp3","mp4","sound","voice","recorder","subtitle","podcast"]},
+  {id:"design",category:"🎨 Design & Creativity",tag:"Design & Creativity",icon:"🖌️",description:"Design graphics, layouts, logos and creative assets",accent:"#f472b6",accent2:"#8b5cf6",words:["graphic design","logo maker","poster maker","design tool","ui design","ux design","figma","canva","illustration","template","design","logo","font","color palette"]},
+  {id:"education",category:"📚 Education & Learning",tag:"Education",icon:"📚",description:"Learn, study, practice and explore educational resources",accent:"#22c55e",accent2:"#06b6d4",words:["online learning","learning platform","tutorial","education","course","school","study","quiz","lesson","exam","homework","dictionary","flashcard","language learning"]},
+  {id:"business",category:"🛍️ Shopping & Business",tag:"Business & Shopping",icon:"🛍️",description:"Shopping, products, payments and business services",accent:"#f97316",accent2:"#ef4444",words:["amazon affiliate","affiliate marketing","online shopping","e commerce","ecommerce","shopping","product marketplace","payment gateway","invoice generator","business","payment","invoice","store","shop","affiliate"]},
+  {id:"social",category:"💬 Social & Communication",tag:"Social / Communication",icon:"💬",description:"Communicate, message and connect with communities",accent:"#0ea5e9",accent2:"#6366f1",words:["social media","messaging app","video call","community forum","messenger","messaging","chat","forum","instagram","facebook","whatsapp","telegram","discord"]},
+  {id:"productivity",category:"📁 Productivity & Documents",tag:"Productivity",icon:"📁",description:"Manage documents, notes, tasks and everyday work",accent:"#14b8a6",accent2:"#3b82f6",words:["document editor","word processor","spreadsheet","presentation maker","task manager","project management","cloud storage","online notes","productivity","document","notepad","calendar","notes","drive","excel","word"]},
+  {id:"security",category:"🔐 Security & Privacy",tag:"Security & Privacy",icon:"🔐",description:"Security, privacy, password and network tools",accent:"#64748b",accent2:"#0f172a",words:["password manager","virus scanner","malware scanner","privacy checker","security scanner","two factor","vpn","antivirus","encryption","password","security","privacy"]},
+  {id:"finance",category:"💰 Finance & Calculators",tag:"Finance / Calculator",icon:"💰",description:"Calculations, budgeting and financial utilities",accent:"#16a34a",accent2:"#84cc16",words:["currency converter","loan calculator","gst calculator","tax calculator","interest calculator","budget planner","stock market","exchange rate","calculator","finance","budget","currency","investment","invoice"]},
+  {id:"travel",category:"🧭 Travel & Maps",tag:"Travel / Maps",icon:"🧭",description:"Maps, navigation, destinations and travel planning",accent:"#0ea5e9",accent2:"#22c55e",words:["route planner","travel planner","flight booking","hotel booking","google maps","navigation","directions","maps","map","travel","hotel","flight"]},
+  {id:"weather",category:"🌦️ Weather & Environment",tag:"Weather",icon:"🌦️",description:"Weather forecasts and environmental information",accent:"#38bdf8",accent2:"#0ea5e9",words:["weather forecast","weather radar","air quality","weather","forecast","temperature"]},
+  {id:"health",category:"🩺 Health & Wellness",tag:"Health / Wellness",icon:"🩺",description:"Health information and wellness resources",accent:"#14b8a6",accent2:"#059669",words:["fitness tracker","workout planner","health tracker","mental wellness","nutrition","fitness","workout","wellness","health"]},
+  {id:"news",category:"📰 News & Information",tag:"News / Information",icon:"📰",description:"News, articles and current information",accent:"#64748b",accent2:"#2563eb",words:["news portal","breaking news","news","magazine","blog","articles"]}
+ ];
+ // Score exact phrase matches by source: purpose/name > project slug > route > custom domain.
+ // This avoids classifying every GitHub Pages URL as a programming website.
+ const normalizeMatch=v=>" "+clean(v).replace(/[^a-z0-9+#.\s]/g," ").replace(/\s+/g," ").trim()+" ";
+ const weightedSignals=[
+   {text:normalizeMatch(primarySignal),weight:4.0},
+   {text:normalizeMatch(projectSignal),weight:3.2},
+   {text:normalizeMatch(routeSignal),weight:1.8},
+   {text:normalizeMatch(hostingProvider?"":host),weight:1.2}
+ ];
+ let best=null,bestScore=0;
+ for(const r of rules){
+   let score=0;
+   for(const w of r.words){
+     const phrase=" "+w.toLowerCase()+" ";
+     for(const source of weightedSignals){
+       if(source.text.includes(phrase)){
+         const n=w.trim().split(/\s+/).length;
+         const points=(n*10 + Math.min(w.length,36)/8)*source.weight;
+         if(points>score) score=points;
+       }
+     }
+   }
+   // Avoid weak matches from generic words like "editor", "play", or "image" alone.
+   if(score>bestScore){best=r;bestScore=score;}
+ }
+ if(bestScore<18){best=null;bestScore=0;}
+ // Explicit user-supplied category is the most reliable option and overrides heuristic guessing.
+ if(t.category && String(t.category).trim()){
+   const customCategory=String(t.category).trim();
+   const matching=rules.find(r=>r.category.toLowerCase()===customCategory.toLowerCase());
+   return {name:t.name||"Website",category:customCategory,icon:t.icon||(matching?matching.icon:"🌐"),description:t.description||(matching?matching.description:"Website grouped under the category you specified"),tag:t.tag||(matching?matching.tag:"Custom Category"),accent:t.accent||(matching?matching.accent:"#4f8cff"),accent2:t.accent2||(matching?matching.accent2:"#00d9ff")};
+ }
+ // Existing named cards retain their exact original design and section.
+ if(t.name && languageNames.has(t.name)) best=rules.find(r=>r.id==="code");
+ else if(t.name && meta[t.name]) best=rules.find(r=>r.id==="imagepdf");
+ const rawSlug=githubPath || path || (hostingProvider ? "" : host) || "website";
+ let slug=rawSlug.replace(/\b(arnc|ar nc|website|web app|index|home|main|final|new|latest|updated|version|v\d+)\b/ig," ").replace(/\s+/g," ").trim();
+ const titleCase=v=>v.split(/\s+/).filter(Boolean).map(w=>{
+   const low=w.toLowerCase();
+   if(["ai","pdf","html","css","php","api","url","3d","ui","ux","sql","xml","mp3","mp4","gif","svg","jpg","png","json","js","c++","c#"].includes(low)) return low.toUpperCase();
+   return low.charAt(0).toUpperCase()+low.slice(1);
+ }).join(" ");
+ let generated=titleCase(slug);
+ const titleRules=[
+  [/translang|translator|translation|translate/i,"Language Translator"],
+  [/gaming|game.?portal|online.?games|browser.?games|games/i,"Gaming Website"],
+  [/image\s*(to|2)\s*pdf|image.?to.?pdf|jpg\s*to\s*pdf|png\s*to\s*pdf/i,"Image to PDF Converter"],
+  [/pdf\s*(to|2)\s*image|pdf.?to.?image|pdf\s*to\s*(jpg|png)/i,"PDF to Image Converter"],
+  [/background.*remov|remov.*background/i,"Background Remover"],
+  [/image.*resiz|resiz.*image/i,"Image Resizer"],
+  [/photo.*edit|edit.*photo/i,"Photo Editor"],
+  [/merge.*(pdf|image|file)|(pdf|image|file).*merge/i,"File Merge Studio"],
+  [/format.*convert|convert.*format/i,"Format Converter"],
+  [/python/i,"Python Coding Studio"],[/javascript/i,"JavaScript Coding Studio"],[/typescript/i,"TypeScript Coding Studio"],
+  [/\bjava\b/i,"Java Coding Studio"],[/\bphp\b/i,"PHP Coding Studio"],
+  [/html.*(preview|live)|(preview|live).*html/i,"HTML Live Preview"],
+  [/c.?c\+\+|c.?sharp|code.?studio|compiler/i,"Programming Code Studio"],
+  [/car.*game|racing/i,"Racing Game"],[/runner.*game|endless.?runner/i,"Endless Runner Game"],
+  [/chat.?bot|chatgpt|ai.?assistant/i,"AI Chat Assistant"],[/image.*generat/i,"AI Image Generator"],[/video.*generat/i,"AI Video Generator"],
+  [/video.*edit/i,"Video Editor"],[/audio.*convert/i,"Audio Converter"],[/translator|translation/i,"Language Translator"],
+  [/calculator/i,"Online Calculator"],[/weather|forecast/i,"Weather Forecast"],[/dictionary/i,"Online Dictionary"],
+  [/logo.*maker|maker.*logo/i,"Logo Maker"],[/password.*manager/i,"Password Manager"],[/currency.*convert/i,"Currency Converter"],
+  [/travel.*planner|route.*planner/i,"Travel Planner"],[/quiz/i,"Online Quiz"],[/note.?pad|online.?notes/i,"Online Notes"]
+ ];
+ for(const [re,name] of titleRules){if(re.test(signal)){generated=name;break;}}
+ if(!generated || generated.length<3 || /^(github|google|website|new)$/i.test(generated)) generated=best?best.tag+" Tool":titleCase(host)||"Website";
+ // Avoid ugly repository IDs: if the path is opaque, use a useful category-based title.
+ if(/^[a-f0-9-]{8,}$/i.test(generated) || generated.length>54) generated=best?best.tag+" Tool":titleCase(host)||"Website";
+ // If no known purpose matches, derive a dedicated category from the URL slug.
+ // This prevents every custom website from falling into the same generic section.
+ const fallbackBase=titleCase(slug.replace(/\b(arnc|website|web app|index|home|main|final|new|latest|updated|version|v\d+)\b/ig," ").replace(/\s+/g," ").trim());
+ const fallbackCategory=fallbackBase && !/^(Github|Google|Website|New)$/i.test(fallbackBase)
+   ? "🌐 "+fallbackBase+" Tools"
+   : "🌐 Other Websites";
+ const category=best?best.category:fallbackCategory;
+ const fallbackDescription=fallbackBase
+   ? "Automatically grouped from this website's URL. Add a descriptive name or purpose keywords for more accurate classification."
+   : "Website automatically added from its URL; category can be refined by adding a name.";
+ return {name:t.name||generated,category,icon:best?best.icon:"🌐",description:best?best.description:fallbackDescription,tag:best?best.tag:(fallbackBase||"Website"),accent:best?best.accent:"#4f8cff",accent2:best?best.accent2:"#00d9ff"};
+}
+function toolInfo(t){
+ const inferred=inferTool(t);
+ const x=meta[t.name];
+ if(x) return {name:t.name,category:languageNames.has(t.name)?"💻 Programming Languages & Web Development":"🎨 Image, PDF & Utility Studios",icon:x[0],description:x[1],tag:x[2],accent:x[3],accent2:x[4]};
+ return inferred;
+}
+function openExternal(url){
+ const a=document.createElement("a");
+ a.href=url; a.target="_blank"; a.rel="noopener noreferrer";
+ a.style.display="none";
+ document.body.appendChild(a); a.click(); a.remove();
+}
+function card(t,i){
+ const info=toolInfo(t);
+ const b=document.createElement("button"); b.className="tool-card"; b.dataset.name=(info.name+" "+t.url+" "+info.category).toLowerCase();
+ b.style.setProperty("--accent",info.accent);b.style.setProperty("--accent2",info.accent2);b.style.setProperty("--glow",info.accent);
+ const icon=document.createElement("div");icon.className="icon";icon.textContent=info.icon;
+ const h=document.createElement("h4");h.textContent=info.name;
+ const p=document.createElement("p");p.textContent=info.description;
+ const small=document.createElement("small");small.style.cssText="display:block;margin-top:8px;color:#7085a8;font-size:10px";small.textContent=info.tag;
+ const open=document.createElement("span");open.className="open";open.textContent="OPEN WEBSITE ↗";
+ b.append(icon,h,p,small,open); b.title=t.url;
+ b.onclick=()=>openExternal(t.url);
+ return b;
+}
+function render(){
+  const q=search.value.trim().toLowerCase();
+  langBox.innerHTML="";
+  creativeBox.innerHTML="";
+  dynamicSections.innerHTML="";
+  const groups=new Map();
+  let visible=0;
+
+  TOOLS.forEach((t,i)=>{
+    if(!t || !t.url) return;
+    const info=toolInfo(t);
+    if(q && !((info.name+" "+info.description+" "+info.tag+" "+info.category+" "+t.url).toLowerCase().includes(q))) return;
+    visible++;
+    const c=card(t,i);
+
+    // Preserve the two original main sections, while grouping all other inferred categories below.
+    if(info.category.startsWith("💻")) langBox.appendChild(c);
+    else if(info.category.startsWith("🎨")) creativeBox.appendChild(c);
+    else {
+      if(!groups.has(info.category)) groups.set(info.category,[]);
+      groups.get(info.category).push(c);
+    }
+  });
+
+  document.getElementById("languageSection").classList.toggle("hidden",langBox.children.length===0);
+  document.getElementById("creativeSection").classList.toggle("hidden",creativeBox.children.length===0);
+
+  groups.forEach((cards,heading)=>{
+    const section=document.createElement("section");
+    section.className="section";
+    const head=document.createElement("div");
+    head.className="section-head";
+    const left=document.createElement("div");
+    const h=document.createElement("h3");
+    h.textContent=heading;
+    const p=document.createElement("p");
+    p.textContent="Websites automatically grouped by their URL and purpose";
+    left.append(h,p);
+    const badge=document.createElement("span");
+    badge.className="section-badge";
+    badge.textContent="AUTO CATEGORY";
+    head.append(left,badge);
+    const cardsBox=document.createElement("div");
+    cardsBox.className="cards";
+    cards.forEach(c=>cardsBox.appendChild(c));
+    section.append(head,cardsBox);
+    dynamicSections.appendChild(section);
+  });
+
+  document.getElementById("noresults").classList.toggle("hidden",visible!==0);
+  count.textContent=visible+" tool"+(visible===1?"":"s");
+}
+function openTool(i){ openExternal(TOOLS[i].url); }
+function closeTool(){viewer.classList.remove("show");frame.src="";frame.srcdoc="";current=-1}
+search.oninput=render;
+document.getElementById("closeViewer").onclick=closeTool;
+document.getElementById("reloadTool").onclick=()=>{if(current>=0)openTool(current)};
+document.getElementById("homeBtn").onclick=()=>{closeTool();window.scrollTo({top:0,behavior:"smooth"})};
+document.getElementById("themeBtn").onclick=()=>document.body.classList.toggle("light");
+document.getElementById("fullBtn").onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.();
+document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();search.focus()}if(e.key==="Escape"&&viewer.classList.contains("show"))closeTool()});
+render();
+</script>
+</body>
+</html>
